@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './About.module.css'
+import { useAuthValue } from '../../context/AuthContext'
 
 const About = () => {
+  const { user } = useAuthValue()
   return (
     <>
       <div className={styles.about}>
@@ -11,9 +13,8 @@ const About = () => {
           Este projeto consiste em um escopo de blog feito
           com tecnologia React no front-end e Firebase no back-end.
         </p>
-        <Link to="/post/create" className={styles.btn}>
-          Criar Post
-        </Link>
+        {!user ? <Link to='/login' className={styles.btn}>Criar post</Link> : <Link to='/post/create' className={styles.btn}>Criar post</Link>}
+
       </div>
     </>
   )
